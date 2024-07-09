@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Dashboard</h2>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <button type="button" class="btn btn-primary btn-block" onclick="window.location.href='/create_call'">Create Call</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-success btn-block" onclick="window.location.href='/fetch_call_summary'">Fetch Call Summary</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-info btn-block" onclick="window.location.href='/fetch_call_analytics'">Fetch Call Analytics</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="alert alert-info">
+                    <strong>Total Calls Today:</strong> {{ total_calls_today }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-success">
+                    <strong>Total Converted Leads Today:</strong> {{ total_converted_leads_today }}
+                </div>
+            </div>
+        </div>
+        <canvas id="callChart"></canvas>
+    </div>
+    <script>
+        var ctx = document.getElementById('callChart').getContext('2d');
+        var callChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Total Calls Today', 'Converted Leads Today'],
+                datasets: [{
+                    label: 'Calls and Leads',
+                    data: [{ total_calls_today ,  total_converted_leads_today }],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
