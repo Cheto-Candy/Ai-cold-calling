@@ -9,30 +9,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -62,16 +38,6 @@ def logout_view(request):
     logout(request)
     return redirect('login')  # Redirect to login page after logout
 # Dashboard view (protected)
-
-
-
-
-
-
-
-
-
-
 
 # views.py
 @login_required
@@ -181,4 +147,3 @@ def fetch_call_analytics(request):
         form = Fetchcallanalyticsform()
     
     return render(request, 'fetch_call_analytics.html', {'form': form})
-
